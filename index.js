@@ -17,7 +17,6 @@ console.log(stringTest);
 
   class Regex {
 
-
     constructor(){
       this.countryCode = "";
       this.value = "";
@@ -107,43 +106,11 @@ rp(URL)
 
       codeLengthMap.set(regex.countryCode, iban.length - regex.countryCode.length);
 
-
-      // regex += `.{${(iban.length+1)-(regex.length)}}$`
-      // regex += `.{${(iban.length+1)-(regex.length)}}`;
-      // regexList.push(regex);
     });
 
     console.log(regexMap);
-
     const sortedMap = new Map([...codeLengthMap.entries()].sort((a, b) => a[1] - b[1]));
-    // console.log(sortedMap);
-
-    // for ( let length of codeLengthMap.values() ) {
-    //   if( length )
-    // }
-    // console.log(codeLengthMap.size);
-    // Voir si SET existe et fait un retour quand valeurs non unique.
     const mapIterator = sortedMap.entries();
-    // console.log(mapIterator.next());
-    const resultMap = new Map();
-    // for (let i = 0; i < sortedMap.size -1; i++) {
-    //   console.log(mapIterator.next());
-    //   if( mapIterator.next().value == )
-    //   // console.log(codeLengthMap.entries(0));
-    //   if (codeLengthMap[i + 1] == codeLengthMap[i]) {
-    //     // results.push(sorted_arr[i]);
-    //     // console.log("test");
-    //   }
-    // }
-
-    // let fullRegex = regexList.join("|");
-    // fullRegex = `^(?:${fullRegex})$/i`;
-    // console.log(fullRegex);
-    //
-    // var file = fs.createWriteStream('regexList.txt');
-    // file.on('error', function(err) { throw err });
-    // regexList.forEach(value => file.write(`${value}\r\n`));
-    // file.end();
 
     })
   .catch(err => console.error(err));
