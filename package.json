@@ -1,0 +1,25 @@
+{
+  "name": "iban-regex",
+  "version": "1.0.0",
+  "description": "iban-regex",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scrap",
+    "html"
+  ],
+  "author": "Octarine-Phaneron",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
+    "request-promise": "^4.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "iban-regex"
+  }
+}
