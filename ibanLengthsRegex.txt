@@ -1,0 +1,1 @@
+/^(?:(?:AD|CZ|RO|SK|ES|SE).{22}|(?:AT|EE|LT|LU).{18}|BE.{14}|(?:BG|DE|IE|GB|VA).{20}|(?:HR|LV|LI|CH).{19}|(?:CY|HU|PL).{26}|(?:DK|FI|NL).{16}|(?:FR|GR|IT|MC|SM).{25}|GI.{21}|IS.{24}|MT.{29}|NO.{13}|PT.{23}|SI.{17})$/i

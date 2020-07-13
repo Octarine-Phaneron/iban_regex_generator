@@ -16,34 +16,29 @@ function getKeys(value, map) {
 rp(URL)
   .then(html => {
 
-    // Récupère les exemples d'IBAN
-    let tdList = $(".structure table tr td:last-child", html);
-    let ibanList = [];
-    for (let i = 0; i < tdList.length; i++) {
-      ibanList.push(tdList[i].children[0].data);
-    }
-    // Map => [codePays, regex-longueur]
+    // Récupère infos tableau d'IBAN
+    const trList = $(".structure table tr", html);
+    const codeList = $("td:nth-child(2)", trList); // Code pays
+    const lengthList = $("td:nth-child(4)", trList); // longueur IBAN
+    const isSepaList = $("td:nth-child(3)", trList); // is Sepa
+
     const regexMap = new Map();
-    ibanList.forEach(iban => regexMap.set( iban.substring(0,2), `.{${iban.length-2}}` ) );
-
-    // Regroupe les code pays ayant la même longueur d'IBAN
-    const uniqueValues = [...new Set( [...regexMap.values()] ) ];
+    for ( let i = 0; i < codeList.length; i++ ) {
+      if ( isSepaList[i].children[0].data == "Yes" ) {
+        regexMap.set( codeList[i].children[0].data, `.{${parseInt(lengthList[i].children[0].data)-2}}` );
+      }
+    }
+    // Map de [ [codePays*n], regexLongueur ]
     const uniqueValuesMap = new Map();
-    uniqueValues.forEach( value => {
-      const keys = getKeys(value, regexMap);
-      keys.forEach( key => uniqueValuesMap.set(keys, value));
-    });
+    [...new Set( [...regexMap.values()] ) ].forEach( value => uniqueValuesMap.set(getKeys(value, regexMap), value) );
+    console.log(uniqueValuesMap);
 
-    // Création du Regex complet
+
+    // // Création du Regex complet
     let masterRegex = "/^(?:"
     let i = 0;
     for ( const [key, value] of uniqueValuesMap.entries() ) {
-
-      if ( key.length > 1 ) {
-        masterRegex += `(?:${key.join("|")})`;
-      }else {
-        masterRegex += key[0];
-      }
+      masterRegex += key.length > 1 ? `(?:${key.join("|")})` : key[0];
       masterRegex += i < uniqueValuesMap.size-1 ? `${value}|` : value;
       i++;
     }
