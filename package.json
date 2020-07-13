@@ -2,12 +2,12 @@
   "name": "iban-regex",
   "version": "1.0.0",
   "description": "iban-regex",
-  "main": "index.js",
+  "main": "createRegex.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "scrap",
+    "parsing",
     "html"
   ],
   "author": "Octarine-Phaneron",
