@@ -5,6 +5,7 @@ const fs = require('fs'); // file system
 
 const URL = "https://www.iban.com/structure";
 const FILE_NAME = "ibanLengthsRegex.txt";
+const ONLY_SEPA = true; // Doit on faire un regex qui ne gère que les IBAN *SEPA* ?
 
 // renvoie array de clés qui pointent vers la même valeur [value] dans la Map [map]
 function getKeys(value, map) {
@@ -24,14 +25,18 @@ rp(URL)
 
     const regexMap = new Map();
     for ( let i = 0; i < codeList.length; i++ ) {
-      if ( isSepaList[i].children[0].data == "Yes" ) {
+      if( ONLY_SEPA ) {
+        if ( isSepaList[i].children[0].data == "Yes" ) {
+          regexMap.set( codeList[i].children[0].data, `.{${parseInt(lengthList[i].children[0].data)-2}}` );
+        }
+      }else{
         regexMap.set( codeList[i].children[0].data, `.{${parseInt(lengthList[i].children[0].data)-2}}` );
       }
     }
     // Map de [ [codePays*n], regexLongueur ]
     const uniqueValuesMap = new Map();
     [...new Set( [...regexMap.values()] ) ].forEach( value => uniqueValuesMap.set(getKeys(value, regexMap), value) );
-    console.log(uniqueValuesMap);
+    // console.log(uniqueValuesMap);
 
 
     // // Création du Regex complet
