@@ -1,11 +1,11 @@
 const fetch = require('fetch');
 const rp = require('request-promise');
 const $ = require('cheerio');
-const fs = require('fs'); // file system
+const fs = require('fs');
 
 const URL = "https://www.iban.com/structure";
 const FILE_NAME = "ibanLengthsRegex.txt";
-const ONLY_SEPA = true; // Doit on faire un regex qui ne gère que les IBAN *SEPA* ?
+const ONLY_SEPA = true;
 
 // renvoie array de clés qui pointent vers la même valeur [value] dans la Map [map]
 function getKeys(value, map) {
